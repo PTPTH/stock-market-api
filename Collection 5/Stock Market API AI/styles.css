@@ -1,0 +1,92 @@
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            /* A deep, dark blue-gray */
+            color: #c9d1d9;
+            /* Light gray text */
+        }
+
+        .font-roboto-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Vertical Ticker styles */
+        .ticker-container-vertical {
+            flex-grow: 1;
+            /* Allow container to fill available space */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-container-vertical::before,
+        .ticker-container-vertical::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 50px;
+            z-index: 2;
+            pointer-events: none;
+            /* Allow clicks to pass through */
+        }
+
+        .ticker-container-vertical::before {
+            top: 0;
+            background: linear-gradient(to bottom, #161b22 0%, transparent 100%);
+        }
+
+        .ticker-container-vertical::after {
+            bottom: 0;
+            background: linear-gradient(to top, #161b22 0%, transparent 100%);
+        }
+
+        @keyframes scroll-vertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+                /* Seamless loop */
+            }
+        }
+
+        .ticker-list-vertical.scrolling {
+            animation: scroll-vertical 180s linear infinite;
+        }
+
+        /* Pausing animation on the container hover is more reliable for clicking moving items */
+        .ticker-container-vertical:hover .ticker-list-vertical.scrolling {
+            animation-play-state: paused;
+        }
+
+        .ticker-item-vertical {
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .ticker-item-vertical.selected {
+            background-color: #238636;
+            /* A vibrant green */
+            color: #ffffff;
+        }
+
+        .ticker-item-vertical.selected .ticker-symbol,
+        .ticker-item-vertical.selected .text-xs {
+            color: #ffffff;
+        }
+
+        /* Custom scrollbar for the details section */
+        .details-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .details-scroll::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+
+        .details-scroll::-webkit-scrollbar-thumb {
+            background-color: #21262d;
+            border-radius: 10px;
+            border: 3px solid #0d1117;
+        }

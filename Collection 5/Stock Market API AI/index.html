@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Dashboard</title>
+    <!-- Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for graphing -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="h-screen w-screen overflow-hidden">
+
+    <!-- Main Grid Layout -->
+    <div class="grid grid-cols-12 h-full">
+
+        <!-- Left Column: Search and Scrolling Ticker -->
+        <div class="col-span-3 lg:col-span-2 bg-[#161b22] border-r border-[#21262d] h-full flex flex-col">
+            <!-- Search Bar -->
+            <div class="p-2 border-b border-[#21262d]">
+                <input type="text" id="search-input" placeholder="Search all stocks..."
+                    class="w-full bg-[#0d1117] text-sm p-2 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            </div>
+            <!-- Ticker Container -->
+            <div class="ticker-container-vertical">
+                <div id="ticker-list" class="ticker-list-vertical scrolling">
+                    <div class="p-4 text-center text-[#8b949e]">Loading Tickers...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Details Panel -->
+        <div class="col-span-9 lg:col-span-10 h-full p-6 lg:p-8 overflow-y-auto details-scroll">
+
+            <!-- Main Content Area -->
+            <div id="main-content">
+                <!-- Default View: When no stock is selected -->
+                <div id="default-view" class="flex items-center justify-center h-full">
+                    <div class="text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-[#8b949e]" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                        </svg>
+                        <h2 class="mt-2 text-xl font-medium text-[#8b949e]">Select a stock from the list</h2>
+                        <p class="mt-1 text-sm text-[#484f58]">Choose a symbol on the left to view its live data and
+                            chart.</p>
+                    </div>
+                </div>
+
+                <!-- Selected Stock View: (Populated by JS) -->
+                <div id="selected-stock-view" class="hidden flex flex-col">
+                    <!-- Header: Name and Percentage -->
+                    <div id="stock-header" class="mb-6 pb-4 border-b border-[#21262d]"></div>
+
+                    <!-- Center: Graph -->
+                    <div class="flex-grow mb-6 min-h-[300px]">
+                        <canvas id="stock-chart"></canvas>
+                    </div>
+
+                    <!-- Bottom: Information -->
+                    <div id="stock-info" class="font-roboto-mono text-sm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to your external JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
